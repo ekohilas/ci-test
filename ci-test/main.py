@@ -2,7 +2,8 @@ import sys
 
 import gitlab_ci_local_parser
 import rule_collator
-import rule_formatter 
+import rule_formatter
+import json
 
 
 def main(json_path: str):
@@ -18,7 +19,12 @@ def main(json_path: str):
         collated_rules=jobs_by_rules,
     )
     formatted_rules = ruleFormatter.format()
-    print(formatted_rules)
+    print(
+        json.dumps(
+            formatted_rules,
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":

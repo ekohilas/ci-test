@@ -9,13 +9,31 @@ class RuleFormatter:
         self.collated_rules = collated_rules
 
     def format(self):
+        json_object = []
         for rule, jobs in self.collated_rules.items():
-            print(rule)
+            rule_dict = {}
 
-            for job in jobs:
-                print(f"\t{job.name}")
+            if rule.if_rule:
+                rule_dict["if"] = rule.if_rule.condition
 
-            print()
+            if rule.changes_rule:
+                rule_dict["changes"] = sorted(
+                    change.glob_path for change in rule.changes_rule.changes
+                )
+
+            rule_dict["jobs"] = sorted(job.name for job in jobs)
+
+            json_object.append(rule_dict)
+
+        sorted_json_object = sorted(
+            json_object,
+            key=lambda x: any((
+                x.get("if"),
+                str(x.get("changes")),
+                str(x["jobs"]),
+            )),
+        )
+        return sorted_json_object
 
 
 if __name__ == "__main__":
