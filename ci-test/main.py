@@ -14,10 +14,10 @@ def main(json_path: str):
         ci_jobs=jobs,
     )
     jobs_by_rules = ruleCollator.jobs_by_rules()
-    rulePrinter = rule_formatter.RulePrinter(
+    ruleFormatter = rule_formatter.RuleFormatter(
         collated_rules=jobs_by_rules,
     )
-    formatted_rules = rulePrinter.format()
+    formatted_rules = ruleFormatter.format()
     print(formatted_rules)
 
 
