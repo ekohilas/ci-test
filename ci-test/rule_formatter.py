@@ -1,14 +1,14 @@
 import job_rules
 
 
-class RulePrinter:
+class RuleFormatter:
     def __init__(
         self,
         collated_rules: dict[job_rules.Rule, set[job_rules.CiJob]],
     ):
         self.collated_rules = collated_rules
 
-    def print(self):
+    def format(self):
         for rule, jobs in self.collated_rules.items():
             print(rule)
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     )
     jobs_by_rules = ruleCollator.jobs_by_rules()
 
-    rulePrinter = RulePrinter(
+    rulePrinter = RuleFormatter(
         collated_rules=jobs_by_rules,
     )
-    rulePrinter.print()
+    rulePrinter.format()
