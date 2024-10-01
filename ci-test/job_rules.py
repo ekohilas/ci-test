@@ -1,11 +1,8 @@
 import dataclasses
 
 
-class Rule: ...
-
-
 @dataclasses.dataclass(frozen=True)
-class IfRule(Rule):
+class IfRule:
     condition: str
 
     def __str__(self):
@@ -18,7 +15,7 @@ class GlobPath:
 
 
 @dataclasses.dataclass(frozen=True)
-class ChangesRule(Rule):
+class ChangesRule:
     changes: tuple[GlobPath]
 
     def __str__(self):
@@ -26,7 +23,7 @@ class ChangesRule(Rule):
 
 
 @dataclasses.dataclass(frozen=True)
-class CombinationRule(Rule):
+class Rule:
     if_rule: IfRule
     changes_rule: ChangesRule
 
