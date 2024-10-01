@@ -40,33 +40,33 @@ class JsonParser(job_rules.JobRulesParser):
 
     @classmethod
     def parse_rule(cls, json_rule: dict) -> job_rules.Rule:
-        if "if" in json_rule:
-            if_rule = job_rules.IfRule(
+        if_rule = (
+            job_rules.IfRule(
                 condition=json_rule["if"],
             )
+            if "if" in json_rule
+            else None
+        )
 
-        if "changes" in json_rule:
-            changes_rule = job_rules.ChangesRule(
+        changes_rule = (
+            job_rules.ChangesRule(
                 changes=tuple(
                     job_rules.GlobPath(glob_path=change)
                     for change in json_rule["changes"]
                 )
             )
+            if "changes" in json_rule
+            else None
+        )
 
-        if "if" in json_rule and "changes" in json_rule:
-            combination_rule = job_rules.CombinationRule(
-                if_rule=if_rule,
-                changes_rule=changes_rule,
-            )
-            return combination_rule
+        # TODO: Log for other rules
 
-        if "if" in json_rule:
-            return if_rule
+        rule = job_rules.Rule(
+            if_rule=if_rule,
+            changes_rule=changes_rule,
+        )
 
-        if "changes" in json_rule:
-            return changes_rule
-
-        raise NotImplementedError(f"Unexpected rule format {json_rule}")
+        return rule
 
 
 if __name__ == "__main__":

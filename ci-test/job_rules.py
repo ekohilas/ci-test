@@ -24,11 +24,13 @@ class ChangesRule:
 
 @dataclasses.dataclass(frozen=True)
 class Rule:
-    if_rule: IfRule
-    changes_rule: ChangesRule
+    if_rule: IfRule | None
+    changes_rule: ChangesRule | None
 
     def __str__(self):
-        return f"{self.if_rule}\n{self.changes_rule}"
+        if_rule = str(self.if_rule) if self.if_rule else ""
+        changes_rule = str(self.changes_rule) if self.changes_rule else ""
+        return "\n".join((if_rule, changes_rule))
 
 
 @dataclasses.dataclass(frozen=True)
