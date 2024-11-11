@@ -20,7 +20,7 @@ class JsonParser(job_rules.JobRulesParser):
     @classmethod
     def parse_job(cls, json_object: dict) -> job_rules.CiJob:
         name = json_object["name"]
-        json_rules = json_object["rules"]
+        json_rules = json_object.get("rules", [])
         rules = cls.parse_rules(
             json_rules=json_rules,
         )
