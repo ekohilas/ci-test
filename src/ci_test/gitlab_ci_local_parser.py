@@ -1,4 +1,4 @@
-import job_rules
+import ci_test.job_rules
 
 import json
 

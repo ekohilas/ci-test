@@ -1,5 +1,5 @@
 import sys
-from main import main
+from ci_test.main import main
 
 
 def cli():

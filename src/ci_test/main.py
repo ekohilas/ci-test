@@ -1,8 +1,8 @@
 import sys
 
-import gitlab_ci_local_parser
-import rule_collator
-import rule_formatter
+import ci_test.gitlab_ci_local_parser
+import ci_test.rule_collator
+import ci_test.rule_formatter
 import json
 
 
