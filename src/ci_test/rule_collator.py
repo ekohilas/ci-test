@@ -1,13 +1,14 @@
 import collections
 
-from ci_test import job_rules
+from ci_test.job_rules import CiJob
+from ci_test.job_rules import Rule
 
 
 class RuleCollator:
-    def __init__(self, ci_jobs: list[job_rules.CiJob]):
+    def __init__(self, ci_jobs: list[CiJob]):
         self.ci_jobs = ci_jobs
 
-    def jobs_by_rules(self) -> dict[job_rules.Rule, set[job_rules.CiJob]]:
+    def jobs_by_rules(self) -> dict[Rule, set[CiJob]]:
         jobs_by_rules = collections.defaultdict(set)
         for job in self.ci_jobs:
             for rule in job.rules:

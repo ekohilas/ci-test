@@ -1,10 +1,11 @@
-from ci_test import job_rules
+from ci_test.job_rules import CiJob
+from ci_test.job_rules import Rule
 
 
 class RuleFormatter:
     def __init__(
         self,
-        collated_rules: dict[job_rules.Rule, set[job_rules.CiJob]],
+        collated_rules: dict[Rule, set[CiJob]],
     ):
         self.collated_rules = collated_rules
 
