@@ -1,0 +1,20 @@
+[project]
+name = "citest"
+version = "0.0.1"
+authors = [
+  { name="Evan Kohilas" },
+]
+description = "A small example package"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/ekohilas/ci-test"
+Issues = "https://github.com/ekohilas/ci-test/issues"
+
+[project.scripts]
+ci-test = "ci_test.cli:cli"
