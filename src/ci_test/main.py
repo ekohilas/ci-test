@@ -1,21 +1,21 @@
 import sys
 
-from ci_test.gitlab_ci_local_parser import JsonParser
-from ci_test.rule_collator import RuleCollator
-from ci_test.rule_formatter import RuleFormatter
+from ci_test import gitlab_ci_local_parser
+from ci_test import rule_collator
+from ci_test import rule_formatter
 import json
 
 
 def main(json_path: str):
-    jsonParser = JsonParser(
+    jsonParser = gitlab_ci_local_parser.JsonParser(
         json_path=json_path,
     )
     jobs = jsonParser.get_jobs()
-    ruleCollator = RuleCollator(
+    ruleCollator = rule_collator.RuleCollator(
         ci_jobs=jobs,
     )
     jobs_by_rules = ruleCollator.jobs_by_rules()
-    ruleFormatter = RuleFormatter(
+    ruleFormatter = rule_formatter.RuleFormatter(
         collated_rules=jobs_by_rules,
     )
     formatted_rules = ruleFormatter.format()

@@ -1,6 +1,6 @@
 import sys
 
-from ci_test.main import main
+from ci_test import main
 
 
 def cli():
@@ -9,7 +9,7 @@ def cli():
         sys.exit(1)
 
     json_path = sys.argv[1]
-    main(json_path=json_path)
+    main.main(json_path=json_path)
 
 
 if __name__ == "__main__":

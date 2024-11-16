@@ -1,17 +1,13 @@
-from ci_test.job_rules import JobRulesParser
-from ci_test.job_rules import CiJob
-from ci_test.job_rules import Rule
-from ci_test.job_rules import IfRule
-from ci_test.job_rules import ChangesRule
+from ci_test import job_rules
 
 import json
 
 
-class JsonParser(JobRulesParser):
+class JsonParser(job_rules.JobRulesParser):
     def __init__(self, json_path):
         self.json_path = json_path
 
-    def get_jobs(self) -> list[CiJob]:
+    def get_jobs(self) -> list[job_rules.CiJob]:
         json_object = self._parse()
         jobs = tuple(self.parse_job(obj) for obj in json_object)
         return jobs
@@ -22,20 +18,20 @@ class JsonParser(JobRulesParser):
         return json_object
 
     @classmethod
-    def parse_job(cls, json_object: dict) -> CiJob:
+    def parse_job(cls, json_object: dict) -> job_rules.CiJob:
         name = json_object["name"]
         json_rules = json_object.get("rules", [])
         rules = cls.parse_rules(
             json_rules=json_rules,
         )
-        job = CiJob(
+        job = job_rules.CiJob(
             name=name,
             rules=rules,
         )
         return job
 
     @classmethod
-    def parse_rules(cls, json_rules: list[dict]) -> list[Rule]:
+    def parse_rules(cls, json_rules: list[dict]) -> list[job_rules.Rule]:
         filtered_rules = (
             json_rule for json_rule in json_rules if json_rule != {"when": "never"}
         )
@@ -43,9 +39,9 @@ class JsonParser(JobRulesParser):
         return rules
 
     @classmethod
-    def parse_rule(cls, json_rule: dict) -> Rule:
+    def parse_rule(cls, json_rule: dict) -> job_rules.Rule:
         if_rule = (
-            IfRule(
+            job_rules.IfRule(
                 condition=json_rule["if"],
             )
             if "if" in json_rule
@@ -53,7 +49,7 @@ class JsonParser(JobRulesParser):
         )
 
         changes_rule = (
-            ChangesRule(
+            job_rules.ChangesRule(
                 changes=tuple(
                     GlobPath(glob_path=change)
                     for change in json_rule["changes"]
@@ -65,7 +61,7 @@ class JsonParser(JobRulesParser):
 
         # TODO: Log for other rules
 
-        rule = Rule(
+        rule = job_rules.Rule(
             if_rule=if_rule,
             changes_rule=changes_rule,
         )
