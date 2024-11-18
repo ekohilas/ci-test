@@ -4,11 +4,17 @@ from ci_test import main
 
 
 def cli():
-    if len(sys.argv) != 2:
-        print("Usage: python main.py <path_to_json>")
-        sys.exit(1)
+    try:
+        program_name, ci_type, command, json_path, *_ = sys.argv
+    except ValueError:
+        raise SystemExit(f"Usage: {sys.argv[0]} gitlab rule-snapshot <path_to_json>")
 
-    json_path = sys.argv[1]
+    if ci_type != "gitlab":
+        raise SystemExit(f"subcommand {ci_type} is not currently supported")
+
+    if command != "rule-snapshot":
+        raise SystemExit(f"subcommand {command} is not currently supported")
+
     main.main(json_path=json_path)
 
 
