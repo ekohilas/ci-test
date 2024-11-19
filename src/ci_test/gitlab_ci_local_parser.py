@@ -51,7 +51,7 @@ class JsonParser(job_rules.JobRulesParser):
         changes_rule = (
             job_rules.ChangesRule(
                 changes=tuple(
-                    GlobPath(glob_path=change)
+                    job_rules.GlobPath(glob_path=change)
                     for change in json_rule["changes"]
                 )
             )
