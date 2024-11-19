@@ -19,9 +19,8 @@ def main(json_path: str):
         collated_rules=jobs_by_rules,
     )
     formatted_rules = ruleFormatter.format()
-    print(
-        json.dumps(
-            formatted_rules,
-            indent=2,
-        )
+    json_output = json.dumps(
+        formatted_rules,
+        indent=2,
     )
+    return json_output

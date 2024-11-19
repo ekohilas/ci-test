@@ -15,7 +15,8 @@ def cli():
     if command != "rule-snapshot":
         raise SystemExit(f"subcommand {command} is not currently supported")
 
-    main.main(json_path=json_path)
+    json_output = main.main(json_path=json_path)
+    print(json_output)
 
 
 if __name__ == "__main__":
