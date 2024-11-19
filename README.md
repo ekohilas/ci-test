@@ -50,7 +50,12 @@ Then, run `ci-test gitlab rule-snapshot gitlab-ci-local.json` to create a collat
 - Support GitHub configurations
 - Add more testing commands
 - Add better CLI
-- Add tests
+- Add linting/formatting
+- Clean up for best practices
+
+## Contibuting
+
+Please see `CONTRIBUTING.md` for a head start.
 
 Pull requests welcome!
 
