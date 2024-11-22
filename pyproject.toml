@@ -1,5 +1,5 @@
 [project]
-name = "ci-test"
+name = "ci-test-toolkit"
 version = "0.0.1"
 authors = [
   { name="Evan Kohilas" },

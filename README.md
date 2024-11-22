@@ -5,7 +5,7 @@ A framework for static analysis testing of CI configurations.
 
 ## Installation
 
-Install using `pipx install ci-test` to add `ci-test` to your PATH.
+Install using `pipx install ci-test-toolkit` to add `ci-test` to your PATH.
 
 The tool can be run either via `ci-test` once installed or `python -m ci_test` from within the `src` folder.
 
