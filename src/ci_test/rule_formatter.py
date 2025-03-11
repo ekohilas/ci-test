@@ -27,11 +27,13 @@ class RuleFormatter:
 
         sorted_json_object = sorted(
             json_object,
-            key=lambda x: any((
-                x.get("if"),
-                str(x.get("changes")),
-                str(x["jobs"]),
-            )),
+            key=lambda x: any(
+                (
+                    x.get("if"),
+                    str(x.get("changes")),
+                    str(x["jobs"]),
+                )
+            ),
         )
         return sorted_json_object
 
