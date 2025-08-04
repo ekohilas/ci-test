@@ -18,4 +18,4 @@ Homepage = "https://github.com/ekohilas/ci-test"
 Issues = "https://github.com/ekohilas/ci-test/issues"
 
 [project.scripts]
-ci-test = "ci_test.cli:cli"
+ci-test = "ci_test.cli:Cli.process_from_sys_argv"
