@@ -48,8 +48,8 @@ jobs:
       id-token: write
     needs:
       - build
-    # uncomment after tested
-    # if: github.repository == 'ekohilas/ci-test' &&  github.ref == 'refs/heads/master'
+    # Prevent failures on external forks or branches.
+    if: github.repository == 'ekohilas/ci-test' &&  github.ref == 'refs/heads/main'
     steps:
     - uses: actions/checkout@v4
     - name: Set up Python
