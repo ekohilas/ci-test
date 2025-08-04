@@ -39,3 +39,30 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest
+
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    # Needed by pypa/gh-action-pypi-publish
+    permissions:
+      id-token: write
+    needs:
+      - build
+    # Prevent failures on external forks or branches.
+    if: github.repository == 'ekohilas/ci-test' &&  github.ref == 'refs/heads/main'
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.12"
+    - name: Install tools
+      run: python -m pip install --upgrade pip twine build
+    - name: Build package
+      run: python -m build
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        # Allows for continous deployment by ignoring errors on a exisiting versions
+        skip-existing: true
+    # TODO: Add a step to create a GitHub release
