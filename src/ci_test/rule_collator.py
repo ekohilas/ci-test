@@ -10,6 +10,9 @@ class RuleCollator:
     def jobs_by_rules(self) -> dict[job_rules.Rule, set[job_rules.CiJob]]:
         jobs_by_rules = collections.defaultdict(set)
         for job in self.ci_jobs:
+            # Ensure jobs with no rules are collated.
+            if not job.rules:
+                jobs_by_rules[job_rules.Rule.make_empty()].add(job)
             for rule in job.rules:
                 jobs_by_rules[rule].add(job)
         return jobs_by_rules
