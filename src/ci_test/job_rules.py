@@ -21,6 +21,13 @@ class Rule:
     if_rule: IfRule | None
     changes_rule: ChangesRule | None
 
+    @classmethod
+    def make_empty(cls) -> "Rule":
+        return cls(
+            if_rule=None,
+            changes_rule=None,
+        )
+
 
 @dataclasses.dataclass(frozen=True)
 class CiJob:
