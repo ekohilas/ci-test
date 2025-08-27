@@ -35,8 +35,9 @@ class MainIntegrationTest(unittest.TestCase):
         self.assertEqual(actual_output, "[]")
 
     def test_input_with_multiple_jobs_is_sorted(self):
+        self.maxDiff = None
         input_path = "test/multiple_rules_sorted_input.json"
-        actual_output = main.main(input_path, option_flags=flags.Flags.NONE)
+        actual_output = main.main(input_path, option_flags=flags.Flags.OUTPUT_JOBS_WITH_NO_RULES)
 
         expected_output_path = "test/multiple_rules_sorted_output.json"
 

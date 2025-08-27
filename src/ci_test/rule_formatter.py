@@ -1,16 +1,20 @@
 from ci_test import job_rules
+from ci_test.rule_sorter import RuleSorter
 
 
 class RuleFormatter:
     def __init__(
         self,
         collated_rules: dict[job_rules.Rule, set[job_rules.CiJob]],
+        rule_sorter: RuleSorter,
     ):
         self.collated_rules = collated_rules
+        self.rule_sorter = rule_sorter
 
     def format(self):
         json_object = []
         for rule, jobs in self.collated_rules.items():
+            # TODO: Update type
             rule_dict = {}
 
             if rule.if_rule:
@@ -25,15 +29,11 @@ class RuleFormatter:
 
             json_object.append(rule_dict)
 
+        sort_function = self.rule_sorter.sort_function
+
         sorted_json_object = sorted(
             json_object,
-            key=lambda x: any(
-                (
-                    x.get("if"),
-                    str(x.get("changes")),
-                    str(x["jobs"]),
-                )
-            ),
+            key=sort_function,
         )
         return sorted_json_object
 
@@ -54,7 +54,12 @@ if __name__ == "__main__":
     )
     jobs_by_rules = ruleCollator.jobs_by_rules()
 
+    import rule_sorter
+
+    ruleSorter = rule_sorter.RuleSorter()
+
     rulePrinter = RuleFormatter(
         collated_rules=jobs_by_rules,
+        rule_sorter=ruleSorter,
     )
     rulePrinter.format()
