@@ -1,5 +1,11 @@
 [
   {
+    "if": "$CI_PIPELINE_SOURCE == 'merge_request_event'",
+    "jobs": [
+      "job-name-2"
+    ]
+  },
+  {
     "if": "$CI_PIPELINE_SOURCE == 'push'",
     "jobs": [
       "job-name-1"
@@ -11,12 +17,6 @@
     ],
     "jobs": [
       "job-name-1",
-      "job-name-2"
-    ]
-  },
-  {
-    "if": "$CI_PIPELINE_SOURCE == 'merge_request_event'",
-    "jobs": [
       "job-name-2"
     ]
   }
