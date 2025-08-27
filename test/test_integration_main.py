@@ -33,3 +33,14 @@ class MainIntegrationTest(unittest.TestCase):
         actual_output = main.main(input_path, option_flags=flags.Flags.NONE)
 
         self.assertEqual(actual_output, "[]")
+
+    def test_input_with_multiple_jobs_is_sorted(self):
+        input_path = "test/multiple_rules_sorted_input.json"
+        actual_output = main.main(input_path, option_flags=flags.Flags.NONE)
+
+        expected_output_path = "test/multiple_rules_sorted_output.json"
+
+        with open(expected_output_path) as f:
+            expected_output = f.read()
+
+        self.assertEqual(actual_output, expected_output)

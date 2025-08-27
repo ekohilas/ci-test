@@ -1,0 +1,28 @@
+[
+    {
+        "name": "job-name-1",
+        "rules": [
+            {
+                "if": "$CI_PIPELINE_SOURCE == 'push'"
+            },
+            {
+                "changes": [
+                    "**/*.py"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "job-name-2",
+        "rules": [
+            {
+                "changes": [
+                    "**/*.py"
+                ]
+            },
+            {
+                "if": "$CI_PIPELINE_SOURCE == 'merge_request_event'"
+            }
+        ]
+    }
+]
