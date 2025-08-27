@@ -5,6 +5,18 @@
     ]
   },
   {
+    "if": "$CI_PIPELINE_SOURCE == 'merge_request_event'",
+    "jobs": [
+      "job-rules-if-or-changes"
+    ]
+  },
+  {
+    "if": "$CI_PIPELINE_SOURCE == 'push'",
+    "jobs": [
+      "job-rules-if"
+    ]
+  },
+  {
     "changes": [
       "**/*.json"
     ],
@@ -22,23 +34,11 @@
   },
   {
     "if": "$CI_PIPELINE_SOURCE == 'merge_request_event'",
-    "jobs": [
-      "job-rules-if-or-changes"
-    ]
-  },
-  {
-    "if": "$CI_PIPELINE_SOURCE == 'merge_request_event'",
     "changes": [
       "**/*.py"
     ],
     "jobs": [
       "job-rules-if-and-changes"
-    ]
-  },
-  {
-    "if": "$CI_PIPELINE_SOURCE == 'push'",
-    "jobs": [
-      "job-rules-if"
     ]
   }
 ]
