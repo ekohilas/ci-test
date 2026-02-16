@@ -1,4 +1,10 @@
 # CI Test
+
+![img](https://img.shields.io/pypi/dm/ci-test)
+![image](https://img.shields.io/pypi/v/ci-test.svg)
+![image](https://img.shields.io/pypi/pyversions/ci-test.svg)
+![image](https://img.shields.io/pypi/l/ci-test.svg)
+
 ## Evan Kohilas
 
 A framework for static analysis testing of CI configurations.
